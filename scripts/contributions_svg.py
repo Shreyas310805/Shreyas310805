@@ -1,4 +1,5 @@
 import argparse
+import datetime
 import json
 import os
 import random
@@ -48,10 +49,18 @@ def fetch(login, token):
 def demo_calendar():
     random.seed(7)
     weeks = []
-    for _ in range(53):
+    start = datetime.date.today() - datetime.timedelta(days=371)
+    start -= datetime.timedelta(days=(start.weekday() + 1) % 7)
+    for w in range(53):
         days = []
-        for _ in range(7):
-            days.append({"contributionCount": max(0, int(random.gauss(2, 3)))})
+        for d in range(7):
+            day = start + datetime.timedelta(days=w * 7 + d)
+            days.append(
+                {
+                    "contributionCount": max(0, int(random.gauss(2, 3))),
+                    "date": day.isoformat(),
+                }
+            )
         weeks.append({"contributionDays": days})
     total = sum(d["contributionCount"] for w in weeks for d in w["contributionDays"])
     return {"totalContributions": total, "weeks": weeks}
@@ -114,6 +123,71 @@ def render(total, active, best, days, fg, dim, fill):
 </svg>"""
 
 
+CELL = 11
+GAP = 3
+TOP = 22
+
+
+def calendar_svg(weeks, fg, dim):
+    counts = [d["contributionCount"] for w in weeks for d in w["contributionDays"]]
+    peak = max(counts) if counts else 1
+    steps = [0.10, 0.30, 0.50, 0.72, 1.0]
+
+    cells = []
+    labels = []
+    seen = set()
+    for wi, week in enumerate(weeks):
+        x = wi * (CELL + GAP)
+        for day in week["contributionDays"]:
+            d = datetime.date.fromisoformat(day["date"])
+            row = (d.weekday() + 1) % 7
+            y = TOP + row * (CELL + GAP)
+            c = day["contributionCount"]
+            if c == 0:
+                op = steps[0]
+            else:
+                q = c / peak
+                if q <= 0.15:
+                    op = steps[1]
+                elif q <= 0.35:
+                    op = steps[2]
+                elif q <= 0.65:
+                    op = steps[3]
+                else:
+                    op = steps[4]
+            cells.append(
+                '<rect x="%d" y="%d" width="%d" height="%d" rx="2.5" fill="%s" opacity="%.2f"/>'
+                % (x, y, CELL, CELL, fg, op)
+            )
+            if d.day <= 7 and d.strftime("%b") not in seen:
+                seen.add(d.strftime("%b"))
+                labels.append(
+                    '<text x="%d" y="14" font-size="9" fill="%s">%s</text>'
+                    % (x, dim, d.strftime("%b").lower())
+                )
+
+    w = len(weeks) * (CELL + GAP)
+    h = TOP + 7 * (CELL + GAP) + 26
+    legend_x = w - 150
+    ly = h - 8
+    legend = ['<text x="%d" y="%d" font-size="9" fill="%s">less</text>' % (legend_x, ly, dim)]
+    for i, op in enumerate(steps):
+        legend.append(
+            '<rect x="%d" y="%d" width="%d" height="%d" rx="2.5" fill="%s" opacity="%.2f"/>'
+            % (legend_x + 32 + i * (CELL + 3), ly - 9, CELL, CELL, fg, op)
+        )
+    legend.append(
+        '<text x="%d" y="%d" font-size="9" fill="%s">more</text>'
+        % (legend_x + 32 + 5 * (CELL + 3) + 4, ly, dim)
+    )
+
+    mono = "ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
+    return (
+        '<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" viewBox="0 0 %d %d" '
+        'role="img" aria-label="contribution calendar"><g font-family="%s">%s%s%s</g></svg>'
+    ) % (w, h, w, h, mono, "".join(labels), "".join(cells), "".join(legend))
+
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--user", default=os.environ.get("GH_USER", ""))
@@ -139,6 +213,12 @@ def main():
     (out / "contributions-light.svg").write_text(
         render(total, active, best, days, "#24292F", "#57606A", "rgba(36,41,47,0.08)"),
         encoding="utf-8",
+    )
+    (out / "calendar-dark.svg").write_text(
+        calendar_svg(cal["weeks"], "#C9D1D9", "#8B949E"), encoding="utf-8"
+    )
+    (out / "calendar-light.svg").write_text(
+        calendar_svg(cal["weeks"], "#24292F", "#57606A"), encoding="utf-8"
     )
     print("total:", total, "active:", active, "best week:", best)
 
