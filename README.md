@@ -10,6 +10,11 @@
   <img src="assets/contributions-light.svg" alt="contribution activity" width="760">
 </picture>
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/calendar-dark.svg">
+  <img src="assets/calendar-light.svg" alt="contribution calendar" width="760">
+</picture>
+
 <sub>
 <a href="https://shreyas310805.github.io">shreyas310805.github.io</a> ·
 <a href="https://www.linkedin.com/in/shreyas-tiwari">linkedin</a> ·
@@ -60,6 +65,12 @@ html   css   chart.js   mysql   git   colab   kaggle
 <a href="https://shreyas310805.github.io">portfolio</a>      : html, css, js
                  multi-page dark theme, live on github pages
 </pre>
+
+## leetcode
+
+<div align="center">
+<img src="https://leetcard.jacoblin.cool/mMrYb9OFae?theme=dark&font=Source%20Code%20Pro&ext=heatmap" width="500" alt="leetcode stats">
+</div>
 
 ## elsewhere
 
