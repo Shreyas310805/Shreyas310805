@@ -27,44 +27,33 @@
 
 ## about
 
-<pre>
-cs student at vit bhopal. small sharp tools over big vague ideas.
-
-i build in python, mostly around llms — prompt engineering, retrieval,
-structured output — and the data pipelines that keep them honest.
-one algorithm problem a day, because a model is only as good as the
-reasoning feeding it.
-
-right now: <a href="https://shreyas310805.github.io/promptlib/">promptlib</a>, a prompt library that shows the output first
-and the prompt second. also squeezing a leaf-disease model down small
-enough to run on a solar-powered pi in a field.
-</pre>
+> **cs student at vit bhopal. small sharp tools over big vague ideas.**
+>
+> i build in python, mostly around llms — prompt engineering, retrieval, structured
+> output — and the data pipelines that keep them honest. one algorithm problem a day,
+> because a model is only as good as the reasoning feeding it.
+>
+> right now: squeezing a leaf-disease model down small enough to run on a
+> solar-powered pi in a field.
 
 ## stack
 
-<pre>
-python   java   javascript   php   sql
-
-tensorflow   keras   tflite   numpy   pandas   scikit-learn
-
-html   css   chart.js   mysql   git   colab   kaggle
-</pre>
+|  |  |
+|---|---|
+| **languages** | `python` `java` `javascript` `php` `sql` |
+| **ml** | `tensorflow` `keras` `tflite` `scikit-learn` |
+| **data** | `numpy` `pandas` `matplotlib` `mysql` |
+| **web** | `html` `css` `chart.js` `oauth 2.0` |
+| **tools** | `git` `colab` `kaggle` `github pages` `raspberry pi` |
 
 ## projects
 
-<pre>
-<a href="https://github.com/Shreyas310805/promptlib">promptlib</a>      : javascript, static, github pages
-                 266 image prompts + 456 text templates, no backend
-
-<a href="https://github.com/Shreyas310805/soybean-paper1">soybean</a>        : python, tensorflow, tflite
-                 lightweight cnn benchmark, int8 quantized under 3 mb
-
-<a href="https://github.com/Shreyas310805/LifeOS">lifeos</a>         : javascript, chart.js, oauth 2.0
-                 tasks and health analytics behind one state layer
-
-<a href="https://shreyas310805.github.io">portfolio</a>      : html, css, js
-                 multi-page dark theme, live on github pages
-</pre>
+| | | |
+|---|---|---|
+| **[promptlib](https://github.com/Shreyas310805/promptlib)** <br> <sub>[live](https://shreyas310805.github.io/promptlib/)</sub> | 266 image prompts and 456 text templates, each shown as a finished result you click to reveal the prompt behind. no account, no backend. | <sub>`javascript` `static`</sub> |
+| **[soybean](https://github.com/Shreyas310805/soybean-paper1)** <br> <sub>active</sub> | lightweight cnn benchmark across eight disease classes, quantized to an int8 build under 3 mb for a raspberry pi zero 2 w. | <sub>`python` `tensorflow` `tflite`</sub> |
+| **[lifeos](https://github.com/Shreyas310805/LifeOS)** | task tracking and health analytics behind one shared state layer instead of two disconnected trackers. | <sub>`javascript` `chart.js` `oauth`</sub> |
+| **[portfolio](https://shreyas310805.github.io)** <br> <sub>[live](https://shreyas310805.github.io)</sub> | multi-page dark-theme site, hand-built and deployed on github pages. | <sub>`html` `css` `js`</sub> |
 
 ## leetcode
 
@@ -74,6 +63,6 @@ html   css   chart.js   mysql   git   colab   kaggle
 
 ## elsewhere
 
-<pre>
-photography · digital art · speedcubing · the gym
-</pre>
+<sub>`photography` &nbsp; `digital art` &nbsp; `speedcubing` &nbsp; `the gym`</sub>
+
+<sub>b.tech cse '26 · vit bhopal · open to software engineering and generative ai internships</sub>
