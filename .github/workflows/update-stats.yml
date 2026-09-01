@@ -26,10 +26,13 @@ jobs:
           GH_USER: ${{ github.repository_owner }}
         run: python scripts/contributions_svg.py --outdir assets
 
+      - name: generate section svgs
+        run: python scripts/sections_svg.py --outdir assets
+
       - name: commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/contributions-*.svg assets/calendar-*.svg
+          git add assets/contributions-*.svg assets/calendar-*.svg assets/terminal-*.svg assets/stack-*.svg
           git diff --staged --quiet || git commit -m "update contribution stats"
           git push
