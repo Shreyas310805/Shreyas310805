@@ -27,24 +27,17 @@
 
 ## about
 
-> **cs student at vit bhopal. small sharp tools over big vague ideas.**
->
-> i build in python, mostly around llms — prompt engineering, retrieval, structured
-> output — and the data pipelines that keep them honest. one algorithm problem a day,
-> because a model is only as good as the reasoning feeding it.
->
-> right now: squeezing a leaf-disease model down small enough to run on a
-> solar-powered pi in a field.
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/terminal-dark.svg">
+  <img src="assets/terminal-light.svg" alt="about" width="760">
+</picture>
 
 ## stack
 
-|  |  |
-|---|---|
-| **languages** | `python` `java` `javascript` `php` `sql` |
-| **ml** | `tensorflow` `keras` `tflite` `scikit-learn` |
-| **data** | `numpy` `pandas` `matplotlib` `mysql` |
-| **web** | `html` `css` `chart.js` `oauth 2.0` |
-| **tools** | `git` `colab` `kaggle` `github pages` `raspberry pi` |
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/stack-dark.svg">
+  <img src="assets/stack-light.svg" alt="stack" width="760">
+</picture>
 
 ## projects
 
