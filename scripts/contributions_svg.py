@@ -10,6 +10,8 @@ QUERY = """
 query($login: String!) {
   user(login: $login) {
     contributionsCollection {
+      restrictedContributionsCount
+      hasAnyRestrictedContributions
       contributionCalendar {
         totalContributions
         weeks {
@@ -43,7 +45,11 @@ def fetch(login, token):
         data = json.load(r)
     if "errors" in data:
         raise SystemExit(data["errors"])
-    return data["data"]["user"]["contributionsCollection"]["contributionCalendar"]
+    cc = data["data"]["user"]["contributionsCollection"]
+    cal = cc["contributionCalendar"]
+    cal["restricted"] = cc.get("restrictedContributionsCount", 0)
+    cal["hasRestricted"] = cc.get("hasAnyRestrictedContributions", False)
+    return cal
 
 
 def demo_calendar():
@@ -204,6 +210,12 @@ def main():
         cal = fetch(a.user, token)
 
     total, active, best, days = summarize(cal)
+    restricted = cal.get("restricted", 0)
+    if restricted:
+        print("private contributions counted:", restricted)
+    elif cal.get("hasRestricted"):
+        print("WARNING: private contributions exist but are not visible.")
+        print("add the 'repo' scope to GH_TOKEN and rerun.")
     out = Path(a.outdir)
     out.mkdir(parents=True, exist_ok=True)
     (out / "contributions-dark.svg").write_text(
